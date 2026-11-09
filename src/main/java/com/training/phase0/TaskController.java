@@ -34,7 +34,6 @@ public class TaskController {
 
         if (createTaskRequest.title() == null || createTaskRequest.title().isBlank()){
             return ResponseEntity.badRequest().body(Map.of("error", "title can't be null, empty string or string of whitespaces"));
-            //return new ResponseEntity<>(taskResponse, HttpStatus.BAD_REQUEST);
         }
         TaskResponse taskResponse = jdbcTemplate.queryForObject("INSERT INTO tasks (title) VALUES (?) RETURNING id, title, done, created_at", taskResponseMapper, createTaskRequest.title());
 
